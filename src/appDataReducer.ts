@@ -1,19 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { itemType } from "./FormModal";
 
 const appDataSlice = createSlice({
   name: "appData",
-  initialState: [] as any,
+  initialState: [] as itemType[],
   reducers: {
     newItem: (state, actions) => {
       const id = state.length + 1;
       state.push({ id, ...actions.payload });
     },
     updateItem: (state, actions) => {
-      const index = state.findIndex((item: any) => item.id === actions.payload.id);
+      const index = state.findIndex((item: itemType) => item.id === actions.payload.id);
       state[index] = actions.payload;
     },
     deleteItem: (state, actions) => {
-      return state.filter((item: any) => item.id !== actions.payload);
+      return state.filter((item: itemType) => item.id !== actions.payload);
     },
   },
 });

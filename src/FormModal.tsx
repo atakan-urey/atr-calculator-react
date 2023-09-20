@@ -30,7 +30,7 @@ const validationSchema = Yup.object({
   atrValue: Yup.number().required("Required"),
 });
 
-export type item = {
+export type itemType = {
   id: number;
   title: string;
   cost: number;
@@ -45,7 +45,7 @@ const initialValues = {
   atrValue: 0,
 };
 
-function FormModal({ open, handleClose, item }: { open: boolean; handleClose: () => void; item?: item }) {
+function FormModal({ open, handleClose, item }: { open: boolean; handleClose: () => void; item?: itemType }) {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
@@ -55,7 +55,7 @@ function FormModal({ open, handleClose, item }: { open: boolean; handleClose: ()
       handleClose();
       setTimeout(() => {
         formik.resetForm();
-      }, 1000);
+      }, 300);
     },
   });
   useEffect(() => {
@@ -65,17 +65,15 @@ function FormModal({ open, handleClose, item }: { open: boolean; handleClose: ()
   }, [item]);
 
   useEffect(() => {
-    if (!open) {
-      formik.resetForm();
-    } else {
-      item && formik.setValues(item);
-    }
+    open
+      ? item && formik.setValues(item)
+      : setTimeout(() => {
+          formik.resetForm();
+        }, 300);
   }, [open, item]);
   return (
     <>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         open={open}
         onClose={handleClose}
         closeAfterTransition

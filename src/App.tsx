@@ -1,23 +1,42 @@
 import InfoCard from "./InfoCard";
-import FormModal from "./FormModal";
+import FormModal, { itemType } from "./FormModal";
 import { Button, Grid } from "@mui/material";
 import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useSelector } from "react-redux";
+import AtrModal from "./AtrModal";
 
 function App() {
   const items = useSelector((state: any) => state.appData);
+
   const [open, setOpen] = useState(false);
-  const [updateItem, setUpdateItem] = useState<any>(null);
+  const [atrOpen, setAtrOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+
   const handleModalOpen = () => setOpen(true);
   const handleModalClose = () => {
-    setUpdateItem(null);
+    setTimeout(() => {
+      setSelectedItem(null);
+    }, 300);
     setOpen(false);
   };
-  const handleUpdateClick = (item: any) => {
-    setUpdateItem(item);
+  const handleUpdateClick = (item: itemType) => {
+    setSelectedItem(item);
     handleModalOpen();
   };
+
+  const handleAtrClick = (item: itemType) => {
+    setSelectedItem(item);
+    setAtrOpen(true);
+  };
+
+  const handleAtrModalClose = () => {
+    setTimeout(() => {
+      setSelectedItem(null);
+    }, 300);
+    setAtrOpen(false);
+  };
+
   return (
     <>
       <div className="p-5 flex flex-col gap-5">
@@ -30,13 +49,14 @@ function App() {
         <hr />
 
         <Grid container columnGap={3} rowGap={3}>
-          {items.map((item: any) => (
+          {items.map((item: itemType) => (
             <Grid key={item.id}>
-              <InfoCard handleUpdateClick={handleUpdateClick} item={item} />
+              <InfoCard handleUpdateClick={handleUpdateClick} handleAtrClick={handleAtrClick} item={item} />
             </Grid>
           ))}
         </Grid>
-        <FormModal open={open} item={updateItem} handleClose={handleModalClose} />
+        <FormModal open={open} item={selectedItem} handleClose={handleModalClose} />
+        <AtrModal open={atrOpen} item={selectedItem} handleClose={handleAtrModalClose} />
       </div>
     </>
   );
