@@ -53,7 +53,7 @@ function AtrModal({ open, handleClose, item }: { open: boolean; handleClose: () 
         <Fade in={open}>
           <Box sx={style}>
             <Stack spacing={3}>
-              <div className="flex justify-around items-center">
+              <div className="flex justify-around items-center flex-wrap gap-5">
                 <div>
                   <h1 className="text-xl font-semibold">{item?.title}</h1>
                   <span className="text-md font-light">{item?.lot} Lot</span>
