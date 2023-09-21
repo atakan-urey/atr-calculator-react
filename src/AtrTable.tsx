@@ -2,6 +2,13 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { itemType } from "./FormModal";
 import { useEffect, useState } from "react";
 
+const maskPrice = (price: number) => {
+  if (isNaN(price)) {
+    return "Invalid Price";
+  }
+  return price.toLocaleString("en-US");
+};
+
 function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
   const [atrItems, setAtrItems] = useState<any[]>([]);
 
@@ -23,7 +30,7 @@ function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
           {
             atrLabel: `ATR-${index}`,
             price: price.toFixed(2),
-            profit: profit.toFixed(0),
+            profit: maskPrice(profit),
             stopLoss: stopLoss.toFixed(2),
           },
         ]);
