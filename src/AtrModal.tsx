@@ -59,8 +59,12 @@ function AtrModal({ open, handleClose, item }: { open: boolean; handleClose: () 
                   <span className="text-md font-light">{item?.lot} Lot</span>
                 </div>
                 <div className="flex flex-col">
-                  <span>Maliyet: {item?.cost} ₺</span>
-                  <span>Stop Loss: {stopLoss.toFixed(2)} ₺</span>
+                  <span>
+                    Cost: {item?.cost} {item?.currency}
+                  </span>
+                  <span>
+                    Stop Loss: {stopLoss.toFixed(2)} {item?.currency}
+                  </span>
                   <span>ATR: {item?.atrValue}</span>
                 </div>
                 <div>

@@ -51,12 +51,18 @@ function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {atrItems.map((item) => (
-              <TableRow key={item.atrLabel}>
-                <TableCell>{item.atrLabel}</TableCell>
-                <TableCell>{item.price} ₺</TableCell>
-                <TableCell>{item.profit} ₺</TableCell>
-                <TableCell>{item.stopLoss} ₺</TableCell>
+            {atrItems.map((atr) => (
+              <TableRow key={atr.atrLabel}>
+                <TableCell>{atr.atrLabel}</TableCell>
+                <TableCell>
+                  {atr.price} {item?.currency}
+                </TableCell>
+                <TableCell>
+                  {atr.profit} {item?.currency}
+                </TableCell>
+                <TableCell>
+                  {atr.stopLoss} {item?.currency}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

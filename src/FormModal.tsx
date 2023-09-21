@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
-import { Button, TextField } from "@mui/material";
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -36,6 +36,7 @@ export type itemType = {
   cost: number;
   lot: number;
   atrValue: number;
+  currency: string;
 };
 
 const initialValues = {
@@ -43,6 +44,7 @@ const initialValues = {
   cost: 0,
   lot: 0,
   atrValue: 0,
+  currency: "₺",
 };
 
 function FormModal({ open, handleClose, item }: { open: boolean; handleClose: () => void; item?: itemType }) {
@@ -101,15 +103,35 @@ function FormModal({ open, handleClose, item }: { open: boolean; handleClose: ()
                     error={formik.touched.title && Boolean(formik.errors.title)}
                     helperText={formik.touched.title && formik.errors.title}
                   />
-                  <TextField
-                    id="cost"
-                    type="number"
-                    label="Cost"
-                    variant="outlined"
-                    {...formik.getFieldProps("cost")}
-                    error={formik.touched.cost && Boolean(formik.errors.cost)}
-                    helperText={formik.touched.cost && formik.errors.cost}
-                  />
+                  <Grid container>
+                    <Grid item sm={8}>
+                      <TextField
+                        id="cost"
+                        type="number"
+                        label="Cost"
+                        variant="outlined"
+                        {...formik.getFieldProps("cost")}
+                        error={formik.touched.cost && Boolean(formik.errors.cost)}
+                        helperText={formik.touched.cost && formik.errors.cost}
+                      />
+                    </Grid>
+                    <Grid item sm={4}>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Currency</InputLabel>
+                        <Select
+                          {...formik.getFieldProps("currency")}
+                          defaultValue={"₺"}
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          label="Currency"
+                        >
+                          <MenuItem value={"₺"}>₺</MenuItem>
+                          <MenuItem value={"$"}>$</MenuItem>
+                          <MenuItem value={"€"}>€</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
                   <TextField
                     id="lot"
                     type="number"

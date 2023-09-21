@@ -8,13 +8,7 @@ import { deleteItem } from "./appDataReducer";
 import { itemType } from "./FormModal";
 
 type InfoCardProps = {
-  item: {
-    id: number;
-    title: string;
-    cost: number;
-    lot: number;
-    atrValue: number;
-  };
+  item: itemType;
   handleUpdateClick: (item: itemType) => void;
   handleAtrClick: (item: itemType) => void;
 };
@@ -32,8 +26,10 @@ function InfoCard({ item, handleUpdateClick, handleAtrClick }: InfoCardProps) {
           subheader={item.lot + " Lot"}
           action={
             <div className="flex flex-col">
-              <span>Maliyet: {item.cost} ₺</span>
-              <span>ATR: {item.atrValue}</span>
+              <span>
+                Cost: {item?.cost} {item?.currency}
+              </span>
+              <span>ATR: {item?.atrValue}</span>
             </div>
           }
         />
