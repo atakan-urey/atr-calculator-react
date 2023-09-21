@@ -57,7 +57,7 @@ function FormModal({ open, handleClose, item }: { open: boolean; handleClose: ()
       handleClose();
       setTimeout(() => {
         formik.resetForm();
-      }, 300);
+      }, 150);
     },
   });
   useEffect(() => {
@@ -71,7 +71,7 @@ function FormModal({ open, handleClose, item }: { open: boolean; handleClose: ()
       ? item && formik.setValues(item)
       : setTimeout(() => {
           formik.resetForm();
-        }, 300);
+        }, 150);
   }, [open, item]);
   return (
     <>

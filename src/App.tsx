@@ -17,7 +17,7 @@ function App() {
   const handleModalClose = () => {
     setTimeout(() => {
       setSelectedItem(null);
-    }, 300);
+    }, 150);
     setOpen(false);
   };
   const handleUpdateClick = (item: itemType) => {
@@ -33,7 +33,7 @@ function App() {
   const handleAtrModalClose = () => {
     setTimeout(() => {
       setSelectedItem(null);
-    }, 300);
+    }, 150);
     setAtrOpen(false);
   };
 
