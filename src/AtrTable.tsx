@@ -3,6 +3,7 @@ import { itemType } from "./FormModal";
 import { useEffect, useState } from "react";
 
 const maskPrice = (price: number) => {
+  price = parseInt(price.toFixed(0));
   if (isNaN(price)) {
     return "Invalid Price";
   }
