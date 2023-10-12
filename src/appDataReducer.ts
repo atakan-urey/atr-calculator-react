@@ -6,7 +6,8 @@ const appDataSlice = createSlice({
   initialState: [] as itemType[],
   reducers: {
     newItem: (state, actions) => {
-      const id = state.length + 1;
+      const id = Date.now().toString();
+      console.log(id);
       state.push({ id, ...actions.payload });
     },
     updateItem: (state, actions) => {
