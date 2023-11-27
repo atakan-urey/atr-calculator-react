@@ -2,7 +2,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { itemType } from "./FormModal";
 import { useEffect, useState } from "react";
 
-const maskPrice = (price: number) => {
+export const maskPrice = (price: number) => {
   price = parseInt(price.toFixed(0));
   if (isNaN(price)) {
     return "Invalid Price";
@@ -18,6 +18,7 @@ function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
     { title: "Price", value: "price" },
     { title: "Profit", value: "profit" },
     { title: "Stop Loss", value: "stopLoss" },
+    { title: "Total Cost", value: "totalCostAfterProfit" },
   ];
 
   const calculateAtr = () => {
@@ -26,6 +27,7 @@ function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
         const price = item?.cost + item?.atrValue * index;
         const stopLoss = item?.cost + item?.atrValue * (index - 2);
         const profit = (item?.cost + item?.atrValue * index - item?.cost) * item?.lot;
+        const totalCostAfterProfit = item?.cost * item?.lot + profit;
         setAtrItems((prev) => [
           ...prev,
           {
@@ -33,6 +35,7 @@ function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
             price: price.toFixed(2),
             profit: maskPrice(profit),
             stopLoss: stopLoss.toFixed(2),
+            totalCostAfterProfit: maskPrice(totalCostAfterProfit),
           },
         ]);
       }
@@ -70,6 +73,9 @@ function AtrTable({ item, atrLength }: { item?: itemType; atrLength: number }) {
                 </TableCell>
                 <TableCell>
                   {atr.stopLoss} {item?.currency}
+                </TableCell>
+                <TableCell>
+                  {atr.totalCostAfterProfit} {item?.currency}
                 </TableCell>
               </TableRow>
             ))}

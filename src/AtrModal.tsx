@@ -7,6 +7,7 @@ import { itemType } from "./FormModal";
 import { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import AtrTable from "./AtrTable";
+import { maskPrice } from "./AtrTable";
 
 const style = {
   position: "absolute" as "absolute",
@@ -64,8 +65,10 @@ function AtrModal({ open, handleClose, item }: { open: boolean; handleClose: () 
                   </span>
                   <span>
                     Stop Loss: {stopLoss.toFixed(2)} {item?.currency}
+                  </span>{" "}
+                  <span>
+                    Total Cost: {item?.cost && item?.lot ? maskPrice(item?.cost * item?.lot) : 0} {item?.currency}
                   </span>
-                  <span>ATR: {item?.atrValue}</span>
                 </div>
                 <div>
                   <TextField

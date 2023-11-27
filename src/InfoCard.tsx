@@ -6,6 +6,7 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useDispatch } from "react-redux";
 import { deleteItem } from "./appDataReducer";
 import { itemType } from "./FormModal";
+import { maskPrice } from "./AtrTable";
 
 type InfoCardProps = {
   item: itemType;
@@ -20,7 +21,7 @@ function InfoCard({ item, handleUpdateClick, handleAtrClick }: InfoCardProps) {
   };
   return (
     <>
-      <Card sx={{ width: 300 }}>
+      <Card sx={{ width: 325 }}>
         <CardHeader
           title={item.title}
           subheader={item.lot + " Lot"}
@@ -30,6 +31,9 @@ function InfoCard({ item, handleUpdateClick, handleAtrClick }: InfoCardProps) {
                 Cost: {item?.cost} {item?.currency}
               </span>
               <span>ATR: {item?.atrValue}</span>
+              <span>
+                Total Cost: {maskPrice(item?.cost * item?.lot)} {item?.currency}
+              </span>
             </div>
           }
         />
